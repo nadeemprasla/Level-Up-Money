@@ -11,7 +11,7 @@ const userController = require('./controllers/user-controller');
 const viewsController = require('./controllers/views-controller');
 
 // directory references
-const clientDir = path.join(__dirname, '../client');
+const clientDir = path.join(__dirname, '../public');
 
 // set up the Express App
 const app = express();
