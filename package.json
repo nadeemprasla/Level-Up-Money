@@ -1,0 +1,28 @@
+{
+  "name": "level-up-money",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadeemprasla/Level-Up-Money.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nadeemprasla/Level-Up-Money/issues"
+  },
+  "homepage": "https://github.com/nadeemprasla/Level-Up-Money#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "sequelize": "^5.21.2"
+  }
+}
