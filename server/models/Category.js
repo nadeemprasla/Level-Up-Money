@@ -11,4 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     Category.associate = function ({Entries}) {
         Category.hasMany(Entries);
     }   
+
+    return Category;
 }

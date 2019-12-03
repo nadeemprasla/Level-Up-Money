@@ -18,4 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         Budget.hasMany(Category);
     }
 
+    return Budget;
+
 }

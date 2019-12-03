@@ -26,5 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     Entries.associate = function ({Category}) {
         Entries.belongsTo(Category);
     }
+
+    return Entries;
     
 }
