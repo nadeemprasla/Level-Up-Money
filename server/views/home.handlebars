@@ -2,6 +2,9 @@
 <form>
   {{#if user}}
     <div class="form login-form">
+      {{> test}}
+      
+      
       <p>Logged in as <strong>{{user.username}}</strong></p>
       <div class="buttons">
         <a class="button logout" href="#">Logout</a>
