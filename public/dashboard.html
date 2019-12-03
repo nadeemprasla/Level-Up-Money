@@ -7,67 +7,100 @@
     <title>DashBoard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-dark">
-        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-        <div class="dropdown mr-sm-2 d-flex justify-content-end">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ${{username}}
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Change Password</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Logout</a>
+    <nav class="navbar navbar-expand-lg bg-info text-white">
+        <img src="../public/images/levelup.png" alt="logo" width="70px" height="70px" class="img-thumbnail">
+        <ul class= "navbar-nav ml-md-auto flex-row d-none d-md-flex">
+            <a class="nav-link mr-sm-5" href="#">Home<span class="sr-only">(current)</span></a>
+            <div class="dropdown mr-sm-5 d-flex justify-content-end">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${{username}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Change Password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Logout</a>
+                </div>
             </div>
-        </div>
+        </ul>
     </nav>
 
-    <div class ="container">
-        <div class="row">
-            <form class="mt-2">
-                <div class="input-group m-sm-2">
-                    <span>Budget/Salary($) </span>
-                    <input class="form-control ml-sm-2" type="number" placeholder="Budget">
-                    <span>Other income($) </span> 
-                    <input class="form-control ml-sm-2" type="number" placeholder="other income">
+    <div class ="container-fluid">
+        <div class ="row">
+            <div class = "col-sm-3 col-xl-2 bd-sidebar">
+                <div class= "d-flex align-items-center mt-5">
+                        <button class="btn btn-link" type="button"><i class="fa fa-plus-circle"></i>Add Catagory</button>
                 </div>
-           
-            </form>
-        </div>
-        <div class="accordion" id="cardParent">
-            <div class="card">
-                <div class="card-header" id = "cH1">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#cardOne" aria-expanded="true" aria-controls="cardOne">
-                            Food
-                        </button>
-                    </h2>
 
-                </div>
+            </div>
+            <div class = "col-md-8" id ="main" style = "border-left: 1px solid lightgray;">
+                <div class="row">
+                    <form class="mt-2">
+                        <div class="input-group m-sm-2">
+                            <span>Budget/Salary($) </span>
+                            <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="Budget">
+                            <span>Other income($) </span> 
+                            <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="other income">
+                        </div>
                 
-                <div class = "collapse show" id="cardOne" aria-labelledby="cH1" data-parent="#cardParent">
-                    <div class = "card-body">
-                        <div class="row">
-                            <div class = "col-sm-3">
-                                Name
+                    </form>
+                </div>
+                <div class="accordion" id="cardParent">
+                    <div class="card">
+                        <div class="card-header" id = "cH1">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#cardOne" aria-expanded="true" aria-controls="cardOne">
+                                    Food
+                                </button>
+                                <button class="btn btn-link" type="button"><i class="fa fa-plus-circle"></i>Add Item</button>
+                            </h2>
+                            
+
+                        </div>
+                        
+                        <div class = "collapse show" id="cardOne" aria-labelledby="cH1" data-parent="#cardParent">
+                            <div class = "card-body">
+                                <div class="row">
+                                    <div class = "col-sm-2">
+                            <span>Name</span>
+                        </div>
+                        <div class = "col-sm-5">
+                            <textarea class="form-control" placeholder="Memo">
+                                
+                            </textarea>
+                        </div>
+                        <div class = "col-sm-2">
+                            <select class="form-control form-control-sm" id="choice1">
+                                <option value="">Credit</option>
+                                <option value="1">Debit</option>
+                            </select>
+                        </div>
+                        <div class = "col-sm-2">
+                            <div>Amount $</div>
+                        </div>
+                    </div><hr>
+                    <div class="row">
+                            <div class = "col-sm-2">
+                                <span>Name</span>
                             </div>
-                            <div class = "col-sm-3">
-                                <textarea>
-                                    Memo
+                            <div class = "col-sm-5">
+                                <textarea class="form-control" placeholder="Memo">
+                            
                                 </textarea>
                             </div>
-                            <div class = "col-sm-3">
+                            <div class = "col-sm-2">
                                 <select class="form-control form-control-sm" id="choice1">
                                     <option value="">Credit</option>
                                     <option value="1">Debit</option>
                                 </select>
                             </div>
-                            <div class = "col-sm-3">
+                            <div class = "col-sm-2">
                                 <div>Amount $</div>
                             </div>
                         </div><hr>
@@ -80,6 +113,7 @@
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#cardTwo" aria-expanded="true" aria-controls="cardTwo">
                                 Healthcare
                             </button>
+                            <button class="btn btn-link" type="button"><i class="fa fa-plus-circle"></i>Add Item</button>
                         </h2>
     
                     </div>
@@ -91,7 +125,8 @@
                     </div>
                 </div>
         </div>
-        
+    </div> 
+    </div>  
     </div>
 
     
