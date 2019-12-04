@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg bg-info text-white">
+        <img src="../public/images/levelup.png" alt="logo" width="70px" height="70px" class="img-thumbnail">
+        <ul class= "navbar-nav ml-md-auto flex-row d-none d-md-flex">
+            <a class="nav-link mr-sm-5 text-white" href="#">Home<span class="sr-only">(current)</span></a>
+            <div class="dropdown mr-sm-5 d-flex justify-content-end">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${{this.username}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Change Password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Logout</a>
+                </div>
+            </div>
+        </ul>
+    </nav>
+
+<div class ="container-fluid">
+        <div class ="row">
+            <div class = "col-sm-3 col-xl-2 bd-sidebar">
+                <div class= "d-flex align-items-center mt-5">
+                    <ul style="list-style-type: none;">
+                        <li style="margin:20px"><a href ="#">Add Catagory</a></li>
+                        <li style="margin:20px"><a href="#">Financial Tips</a></li>
+                        <li style="margin:20px"><a href ="#">Blogs</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class = "col-md-8" id ="main" style = "border-left: 1px solid lightgray;">
+                <div class="row">
+                    <form class="mt-2">
+                        <div class="input-group m-sm-2">
+                            <h4>Budget/Salary($) </h4>
+                            <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="Budget" id="budget" data-bind="value:budget">
+                            <h4>Other income($) </h4> 
+                            <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="Other income" id="othrIncome" data-bind="value:othrIncome">
+                        </div>
+                
+                    </form>
+                </div>
+                <div class="accordion" id="cardParent">
+                    {{#each categories}}
+                    <div class="card">
+                        <div class="card-header" id = {{this.id}}>
+                            <h2 class="mb-0 input-group">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#"+{{catagory.name}} aria-expanded="true" aria-controls="cardOne">
+                                    {{this.category_name}}
+                                </button>
+                                <button class="btn btn-link" type="button"><i class="fa fa-plus"></i>Add Item</button>
+                                <div class="col-sm-2 ml-5">
+                                    <input class="form-control" type = "number" placeholder="amount">{{this.budget}}
+                                </div>
+                            </h2>
+                        </div>
+                        
+                        <div class = "collapse show" id={{category.name}} aria-labelledby={{this.id}} data-parent="#cardParent">
+                            <div class = "card-body">
+                                {{#each entries}}
+                                    <div class="row">
+                                        <div class = "col-sm-2">
+                                            <span>{{this.entry_name}}</span>
+                                        </div>
+                                        <div class = "col-sm-5">
+                                            <textarea class="form-control" placeholder="Memo">
+                                                {{this.memo}}
+                                            </textarea>
+                                        </div>
+                                        <div class = "col-sm-2">
+                                            <select class="form-control form-control-sm" id="choice1">
+                                                <option value="">Credit</option>
+                                                <option value="1">Debit</option>
+                                            </select>
+                                        </div>
+                                        <div class = "col-sm-2">
+                                            <div>${{this.amount}}</div>
+                                        </div>
+                                    </div><hr>
+                                {{/each}}
+                            </div>
+                    
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+                    

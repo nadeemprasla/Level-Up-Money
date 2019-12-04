@@ -1,31 +1,30 @@
-<h1>Express Sequelize Authentication Boilerplate</h1>
-<form>
-  {{#if user}}
-    <div class="form login-form">
-      {{> test}}
+<nav class="navbar navbar-expand-lg bg-info text-white">
+        <img src="../../public/assets/images/levelup.png" alt="logo" width="70px" height="70px" class="img-thumbnail">
+        <ul class= "navbar-nav ml-md-auto flex-row d-none d-md-flex">
+            <a class="nav-link mr-sm-5 text-white" href="#">Home<span class="sr-only">(current)</span></a>
+        </ul>
+    </nav>
 
-      <p>Logged in as <strong>{{user.username}}</strong></p>
-      <div class="buttons">
-        <a class="button logout" href="#">Logout</a>
-      </div>
+<div class="container_fluid">
+  <div class="row">
+    <div class = "col-sm-6" style = "margin-top: 150px; text-align:center">
+      <h1>LevelUp Planner</h1>
+      <img src="../../public/assets/images/levelup.png">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto minima voluptate itaque ipsam rem minus impedit, unde, magnam, nesciunt obcaecati tempora animi aut quae mollitia aspernatur harum rerum excepturi nam.</p>
+
     </div>
-  {{else}}
-    <div class="form login-form">
-      <input type="text" name="username" placeholder="username">
-      <input type="text" name="password" placeholder="password">
-      <div class="buttons">
-        <button class="button login">Login</button>
-        <a class="button signup" href="/register">Signup</a>
-      </div>
+    <div class="col-sm-6" style = "border-left: 1px solid lightgray; height:800px">
+      
+        <h4 style = "text-align: center; margin-top:50px">Get Start with login</h4>
+        
+          <form>
+            <input type="text" name="username" placeholder="username" id="username">
+            <input type="text" name="password" placeholder="password">
+           
+            <button class=" btn btn-info" id="loginId">Login</button>
+            <button class="btn btn-info">Signup</button>
+        
+      </form>
     </div>
-    <div class="form signup-form">
-      <input type="text" name="username" placeholder="username">
-      <input type="text" name="email" placeholder="email">
-      <input type="text" name="password" placeholder="password">
-      <div class="buttons">
-        <a class="button login" href="/">Login</a>
-        <button class="button signup">Signup</button>
-      </div>
-    </div>
-  {{/if}}
-</form>
+  </div>
+</div>

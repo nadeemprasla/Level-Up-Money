@@ -17,9 +17,9 @@
     <nav class="navbar navbar-expand-lg bg-info text-white">
         <img src="../public/images/levelup.png" alt="logo" width="70px" height="70px" class="img-thumbnail">
         <ul class= "navbar-nav ml-md-auto flex-row d-none d-md-flex">
-            <a class="nav-link mr-sm-5" href="#">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-link mr-sm-5 text-white" href="#">Home<span class="sr-only">(current)</span></a>
             <div class="dropdown mr-sm-5 d-flex justify-content-end">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ${{username}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -35,7 +35,11 @@
         <div class ="row">
             <div class = "col-sm-3 col-xl-2 bd-sidebar">
                 <div class= "d-flex align-items-center mt-5">
-                        <button class="btn btn-link" type="button"><i class="fa fa-plus-circle"></i>Add Catagory</button>
+                    <ul>
+                        <li style="margin:20px"><a href ="#"><i class="fa fa-plus-circle"></i>Add Catagory</a></li>
+                        <li style="margin:20px"><a href="#">Financial Tips</a></li>
+                        <li style="margin:20px"><a href ="#">Blogs</a></li>
+                    </ul>
                 </div>
 
             </div>
@@ -43,10 +47,10 @@
                 <div class="row">
                     <form class="mt-2">
                         <div class="input-group m-sm-2">
-                            <span>Budget/Salary($) </span>
+                            <h4>Budget/Salary($) </h4>
                             <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="Budget" id="budget" data-bind="value:budget">
-                            <span>Other income($) </span> 
-                            <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="other income" id="othrIncome" data-bind="value:othrIncome">
+                            <h4>Other income($) </h4> 
+                            <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="Other income" id="othrIncome" data-bind="value:othrIncome">
                         </div>
                 
                     </form>
