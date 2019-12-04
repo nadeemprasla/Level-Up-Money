@@ -23,8 +23,9 @@ module.exports = (sequelize, DataTypes) => {
         
     })
 
-    Entries.associate = function ({Category}) {
+    Entries.associate = function ({Category, User}) {
         Entries.belongsTo(Category);
+        Entries.belongsTo(User);
     }
 
     return Entries;

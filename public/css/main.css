@@ -62,3 +62,14 @@ input + input, .form .buttons {
 .signup-form .signup {
   flex: 2;
 }
+
+
+/* Modal */
+.modal-content {
+    width: 50vw;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}

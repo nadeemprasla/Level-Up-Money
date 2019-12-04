@@ -2,9 +2,9 @@
   "name": "levelupmoney",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "",
   "scripts": {
-    "start": "node server",
+    "start": "node server/server.js",
     "dev": "nodemon server --watch server",
     "sql-cli": "node_modules/.bin/sequelize",
     "lint": "node_modules/.bin/eslint --fix"

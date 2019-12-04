@@ -8,8 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     })
 
  
-    Category.associate = function ({Entries}) {
+    Category.associate = function ({Entries, Budget}) {
         Category.hasMany(Entries);
+        // Category.hasMany(Budget);
+
     }   
 
     return Category;

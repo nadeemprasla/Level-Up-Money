@@ -33,9 +33,9 @@ app.use('/assets', express.static(clientDir));
 // set up handlebars
 app.set('views', path.join(__dirname, '/views'));
 app.engine('handlebars', exphbs({
-  defaultLayout: 'main',
-  extname: '.handlebars',
-  layoutsDir: 'server/views/layouts'
+    defaultLayout: 'main',
+    extname: '.handlebars',
+    layoutsDir: 'server/views/layouts'
 }));
 app.set('view engine', 'handlebars');
 
@@ -47,13 +47,13 @@ require("./controllers/post-api-routes.js")(app);
 
 // Requiring our models for syncing
 const db = require('./models/index');
-
+var syncOptions = { force: true }
 // sync our sequelize models and then start server
 db.sequelize.sync().then(() => {
-  // inside our db sync callback, we start the server.
-  // this is our way of making sure the server is not listening
-  // to requests if we have not yet made a db connection
-  app.listen(PORT, () => {
-    console.log(`App listening on PORT ${PORT}`);
-  });
+    // inside our db sync callback, we start the server.
+    // this is our way of making sure the server is not listening
+    // to requests if we have not yet made a db connection
+    app.listen(PORT, () => {
+        console.log(`App listening on PORT ${PORT}`);
+    });
 });
