@@ -2,9 +2,10 @@ var db = require("../models");
 
 module.exports = function(app) {
 
-  app.get("/api", function(req, res) {
-    db.User.findAll({}).then(function(data) {
-      res.json(data);
+  app.get("/api/category", function(req, res) {
+    db.Category.findAll({}).then(function(data) {
+        console.log(data)
+        res.json(data)
     });
   });
 
@@ -19,11 +20,11 @@ module.exports = function(app) {
 //     });
 //   });
 
-//   app.post("/api/posts", function(req, res) {
-//     db.Post.create(req.body).then(function(dbPost) {
-//       res.json(dbPost);
-//     });
-//   });
+  app.post("/api/category/posts", function(req, res) {
+    db.Category.create(req.body).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
 
 //   app.delete("/api/posts/:id", function(req, res) {
 //     db.Post.destroy({

@@ -1,7 +1,7 @@
 <form>
     {{#if user}}
     {{> navbar user}}
-    {{> dashboard}}
+    {{> dashboard user=user category=category}}
 
     </div>
     {{else}}
@@ -46,6 +46,3 @@
     </div>
     {{/if}}
 </form>
-
-
-{{!-- Shweta --}}

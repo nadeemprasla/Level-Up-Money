@@ -11,7 +11,6 @@ $(function () {
     }
 
     if ($('.logout').length) {
-        $('.apibtn').on('click', here)
         $('.logout').on('click', logout);
     }
 
@@ -19,12 +18,6 @@ $(function () {
 
 })
 
-function here() {
-    $.get("/api", (data)=>{
-        console.log(data)
-    })
-
-}
 
 function validInput(names) {
     for (let i = 0; i < names.length; i++) {
@@ -47,7 +40,12 @@ function login(e) {
     }).then(({ user, authToken }) => {
         $.cookie('auth_token', authToken.token, { expires: 7 });
         if (!user) throw new Error('invalid username or password');
+        sessionStorage.setItem('userId', user.id);
+        sessionStorage.setItem('userEmail', user.email);
+        sessionStorage.setItem('userName', user.username);
+        window.user = user
         window.location.reload()
+        // window.location = '/dashboard'
     }).catch((err) => alert(err.responseText))
 }
 
@@ -81,6 +79,7 @@ function logout(e) {
         window.location.reload()
     })
 }
+
 
 
 

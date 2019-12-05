@@ -7,12 +7,13 @@ module.exports = (sequelize, DataTypes) => {
         },
     })
 
- 
-    Category.associate = function ({Entries, Budget}) {
-        Category.hasMany(Entries);
-        // Category.hasMany(Budget);
 
-    }   
+    Category.associate = function ({ User, Entries, Budget }) {
+        Category.hasMany(Entries);
+        Category.hasMany(Budget);
+        Category.belongsTo(User);
+
+    }
 
     return Category;
 }

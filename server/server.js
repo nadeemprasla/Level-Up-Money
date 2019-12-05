@@ -43,6 +43,7 @@ app.set('view engine', 'handlebars');
 app.use(userController);
 app.use(viewsController);
 require("./controllers/post-api-routes.js")(app);
+require("./controllers/get-api-routes.js")(app);
 
 
 // Requiring our models for syncing

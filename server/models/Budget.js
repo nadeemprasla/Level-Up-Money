@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Budget.associate = function ({ Category, User }) {
-        // Budget.belongsTo(Category);
+        Budget.belongsTo(Category);
         Budget.belongsTo(User);
     }
 

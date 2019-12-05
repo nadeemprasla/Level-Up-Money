@@ -3,7 +3,8 @@
         <div class="col-sm-3 col-xl-2 bd-sidebar">
             <div class="d-flex align-items-center mt-5">
                 <ul style="list-style-type: none;">
-                    <li style="margin:20px"><a href="#">Add Catagory</a></li>
+                    <li style="margin:20px"><button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#categoryModal">Add Catagory</button></li>
                     <li style="margin:20px"><a href="#">Financial Tips</a></li>
                     <li style="margin:20px"><a href="#">Blogs</a></li>
                 </ul>
@@ -24,8 +25,12 @@
 
                 </form>
             </div>
+
+
+
+            
             <div class="accordion" id="cardParent">
-                {{#each categories}}
+                {{#each category}}
                 <div class="card">
                     <div class="card-header" id={{this.id}}>
                         <h2 class="mb-0 input-group">
@@ -75,18 +80,18 @@
 
 
             {{!-- Modal --}}
-            <div class="modal fade" id="enteriesModal" tabindex="-1" role="dialog" aria-labelledby="enteriesModalLabel"
+            <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="enteriesModalLabel">New Entry</h5>
+                            <h5 class="modal-title" id="categoryModalLabel">New Entry</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            {{> modal }}
+                            {{> createCategory this }}
                         </div>
                         {{!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

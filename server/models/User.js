@@ -20,10 +20,11 @@ module.exports = (sequelize, DataTypes) => {
 
   // set up the associations so we can make queries that include
   // the related objects
-  User.associate = function ({ AuthToken, Entries, Budget }) {
+  User.associate = function ({ AuthToken, Entries, Budget, Category }) {
     User.hasMany(AuthToken);
     User.hasMany(Entries);
     User.hasMany(Budget);
+    User.hasMany(Category);
   };
 
   // This is a class method, it is not called on an individual
