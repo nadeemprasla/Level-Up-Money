@@ -28,7 +28,7 @@ if (config.use_env_variable) {
 
   // otherwise we use the config object to initialize our sequelize
   // instance
-  var sequelize = new Sequelize(config.database, config.username, process.env.password, config);
+  var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 // This gathers up all the model files we have yet to create, and

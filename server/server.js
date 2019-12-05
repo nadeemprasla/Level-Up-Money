@@ -35,14 +35,17 @@ app.set('views', path.join(__dirname, '/views'));
 app.engine('handlebars', exphbs({
     defaultLayout: 'main',
     extname: '.handlebars',
-    layoutsDir: 'server/views/layouts'
+    layoutsDir: 'server/views/layouts',
+    partialsDir: 'server/views/partials/'
 }));
 app.set('view engine', 'handlebars');
+
 
 // hook up our controllers
 app.use(userController);
 app.use(viewsController);
 require("./controllers/post-api-routes.js")(app);
+require("./controllers/get-api-routes.js")(app);
 
 
 // Requiring our models for syncing

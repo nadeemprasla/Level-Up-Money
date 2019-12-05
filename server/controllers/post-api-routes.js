@@ -19,11 +19,15 @@ module.exports = function(app) {
 //     });
 //   });
 
-//   app.post("/api/posts", function(req, res) {
-//     db.Post.create(req.body).then(function(dbPost) {
-//       res.json(dbPost);
-//     });
-//   });
+  app.post("/api/addItem", function(req, res) {
+
+    db.Entries.create(req.body).then(function(result) {
+      
+        res.json(result);
+     
+      
+    });
+  });
 
 //   app.delete("/api/posts/:id", function(req, res) {
 //     db.Post.destroy({

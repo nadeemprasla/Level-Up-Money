@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-xl-2 bd-sidebar">
@@ -6,34 +8,50 @@
                     <li style="margin:20px"><a href="#">Add Catagory</a></li>
                     <li style="margin:20px"><a href="#">Financial Tips</a></li>
                     <li style="margin:20px"><a href="#">Blogs</a></li>
+                    <li style="margin:20px"><a href="#">Expence chart</a></li>
                 </ul>
             </div>
 
         </div>
         <div class="col-md-8" id="main" style="border-left: 1px solid lightgray;">
             <div class="row">
-                <form class="mt-2">
-                    <div class="input-group m-sm-2">
-                        <h4>Budget/Salary($) </h4>
-                        <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="Budget" id="budget"
+                <form class="mt-2 ml-3">
+                    <div class="input-group mt-3">
+                        <select class="form-control form-control-sm" id="monthChoice">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <h5 class="ml-3">Budget/Salary($) * </h5>
+                        <input class="form-control ml-sm-2" type="number" placeholder="Budget" id="budget"
                             data-bind="value:budget">
-                        <h4>Other income($) </h4>
-                        <input class="form-control ml-sm-2 mr-sm-3" type="number" placeholder="Other income"
-                            id="othrIncome" data-bind="value:othrIncome">
+                        <h5>Other income($) *</h5>
+                        <input class="form-control ml-sm-2" type="number" placeholder="Other income"
+                            id="othrIncome" data-bind="value:othrIncome">        
                     </div>
 
                 </form>
             </div>
             <div class="accordion" id="cardParent">
-                {{#each categories}}
+                {{!-- {{#each this.categories}} --}}
+                Food
                 <div class="card">
                     <div class="card-header" id={{this.id}}>
                         <h2 class="mb-0 input-group">
                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#"
                                 +{{catagory.name}} aria-expanded="true" aria-controls="cardOne">
-                                {{this.category_name}}
+                                {{this.category_name}} 
                             </button>
-                            <button class="btn btn-link" type="button"><i class="fa fa-plus"></i>Add Item</button>
+                            <button class="btn btn-link addItem" type="submit"><i class="fa fa-plus"></i>Add Item</button>
                             <div class="col-sm-2 ml-5">
                                 <input class="form-control" type="number" placeholder="amount">{{this.budget}}
                             </div>
@@ -43,33 +61,13 @@
                     <div class="collapse show" id={{category.name}} aria-labelledby={{this.id}}
                         data-parent="#cardParent">
                         <div class="card-body">
-                            {{#each entries}}
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <span>{{this.entry_name}}</span>
-                                </div>
-                                <div class="col-sm-5">
-                                    <textarea class="form-control" placeholder="Memo">
-                                                {{this.memo}}
-                                            </textarea>
-                                </div>
-                                <div class="col-sm-2">
-                                    <select class="form-control form-control-sm" id="choice1">
-                                        <option value="">Credit</option>
-                                        <option value="1">Debit</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div>${{this.amount}}</div>
-                                </div>
-                            </div>
-                            <hr>
-                            {{/each}}
+                            
+                            {{> entries result}}
                         </div>
 
                     </div>
                 </div>
-                {{/each}}
+                {{!-- {{/each}} --}}
             </div>
 
 
@@ -96,3 +94,4 @@
                 </div>
             </div>
         </div>
+   

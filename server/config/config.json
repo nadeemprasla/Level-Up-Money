@@ -2,7 +2,7 @@
     "development": {
       "username": "root",
       "password": "password",
-      "database": "levelupbudget_db",
+      "database": "levelupbudgetTest_db",
       "host": "localhost",
       "dialect": "mysql"
     },
