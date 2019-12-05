@@ -12,15 +12,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        category_id: {
+        amountType: {
             type: DataTypes.INTEGER,
             allowNull: false
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        
+        }
+
     })
 
     Entries.associate = function ({Category, User}) {
