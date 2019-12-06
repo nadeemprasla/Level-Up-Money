@@ -13,7 +13,6 @@ module.exports = function(app) {
 
   app.get("/api/allUserInfo/:id", function(req, res) {
 
-    console.log("------------inside getting all data---------------");
     var currentMonth = new Date().getMonth()+1;
     db.Category.findAll({
       where:{
@@ -26,18 +25,12 @@ module.exports = function(app) {
       }
     }).then(function(data) {
 
-      console.log("################")
-      console.log(data)
-      console.log("################")
-
       var alldata = [];
       var categories =[];
       for(var i=0;i<data.length;i++){
         
         var entries = getEntries(req.params.id,data[i].id);
-        console.log("^^^^^^^^^^^")
-        console.log(entries)
-        console.log("^^^^^^^^^^^")
+        
         var entry = [];
         if(entries){
           for(var j=0;j<entries.length;j++){
@@ -53,18 +46,14 @@ module.exports = function(app) {
       var allowance;
       getAllowance(req.params.id,currentMonth,function(data){
         allowance = data;
-        console.log("$$$$$$$$$");
-      console.log(allowance);
-      console.log("$$$$$$$$$");
-      if(allowance){
-        alldata = {
-          total_budget:allowance.total_budget,
-          extraIncome:allowance.extra_income,
-          monthName:currentMonth,
-          categories:categories
+       
+        if(allowance){
+          alldata = {
+            total_budget:allowance.total_budget,
+            extraIncome:allowance.extra_income,
+            monthName:currentMonth,
+            categories:categories
         }
-
-        //res.json(alldata);
         res.render("home",{user:req.user,allData:alldata})
       }
       

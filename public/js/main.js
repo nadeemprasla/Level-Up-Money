@@ -6,27 +6,18 @@ $(document).ready(function() {
     getAllData();
     
     function getAllData() {
+        if(userid){
+            $.get("/api/allUserInfo/"+userid,function(result){
+        
+                document.documentElement.innerHTML=result;
+             });
+        }
 
-        $.get("/api/allUserInfo/"+userid,function(result){
-            
-            console.log("----------------_@@@@----------")
-            console.log(result);
-
-            //location.reload();
-            
-           document.documentElement.innerHTML=result;
-        });
+        
         
     }
 
-    function getAllEntries(category_id){
-
-        $.get("/api/allEntries/"+category_id+"/"+userid,function(result){
-            console.log(result);
-            
-        })
-
-    }
+    
 
 
     
