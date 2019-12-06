@@ -36,11 +36,12 @@ $(document).ready(function () {
     $(".addItem").on("click", function (e) {
 
         e.preventDefault();
-        console.log(e.target.dataset.catid)
+        console.log("cat id for add item", e.target.dataset.catid)
         if (true) {
             console.log("-------inside add item------")
             categoryid = e.target.dataset.catid;
             $("#enteriesModal").modal("toggle");
+            $("#currentcategorychoice").val(categoryid)
         }
         else {
             alert("Please fill all mandatory fields")
