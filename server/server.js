@@ -33,27 +33,69 @@ app.use('/assets', express.static(clientDir));
 // set up handlebars
 app.set('views', path.join(__dirname, '/views'));
 app.engine('handlebars', exphbs({
-  defaultLayout: 'main',
-  extname: '.handlebars',
-  layoutsDir: 'server/views/layouts'
+    defaultLayout: 'main',
+    extname: '.handlebars',
+    layoutsDir: 'server/views/layouts',
+    partialsDir: 'server/views/partials/',
+    helpers: {
+        formatName: function (alldata, categories, user) {
+            console.log("Category current   :", categories)
+            html = "";
+            alldata.forEach((e) => {
+                if (categories.id === e.category_id) {
+                    console.log(categories.id, e)
+                    var amountType;
+                    if(e.amountType === 1) {amountType="Debit"}
+                    else{ amountType="Credit"}
+                    html +=
+                        `
+<div class="row">
+    <div class="col-sm-2">
+        <span>${e.entry_name}</span>
+    </div>
+    <div class="col-sm-5">
+        <p class="form-control">${e.memo}</p>
+    </div>
+    <div class="col-sm-2">
+        <p>${amountType}</p>
+    </div>
+    <div class="col-sm-2">
+        <div>${e.amount}</div>
+    </div>
+</div>
+<hr>
+                    `
+                }
+
+            })
+            return html
+
+        }
+    }
 }));
 app.set('view engine', 'handlebars');
+
 
 // hook up our controllers
 app.use(userController);
 app.use(viewsController);
 require("./controllers/post-api-routes.js")(app);
+require("./controllers/get-api-routes.js")(app);
+
 
 
 // Requiring our models for syncing
 const db = require('./models/index');
-
+var syncOptions = { force: true }
 // sync our sequelize models and then start server
 db.sequelize.sync().then(() => {
-  // inside our db sync callback, we start the server.
-  // this is our way of making sure the server is not listening
-  // to requests if we have not yet made a db connection
-  app.listen(PORT, () => {
-    console.log(`App listening on PORT ${PORT}`);
-  });
+    // inside our db sync callback, we start the server.
+    // this is our way of making sure the server is not listening
+    // to requests if we have not yet made a db connection
+    app.listen(PORT, () => {
+        console.log(`App listening on PORT ${PORT} `);
+    });
 });
+
+
+

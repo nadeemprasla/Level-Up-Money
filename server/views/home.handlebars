@@ -1,31 +1,48 @@
-<h1>Express Sequelize Authentication Boilerplate</h1>
 <form>
-  {{#if user}}
-    <div class="form login-form">
-      {{> test}}
+    {{#if user}}
+    {{> navbar user}}
+    {{> dashboard user=user alldata=alldata category=category allowance=allowance}}
 
-      <p>Logged in as <strong>{{user.username}}</strong></p>
-      <div class="buttons">
-        <a class="button logout" href="#">Logout</a>
-      </div>
     </div>
-  {{else}}
-    <div class="form login-form">
-      <input type="text" name="username" placeholder="username">
-      <input type="text" name="password" placeholder="password">
-      <div class="buttons">
-        <button class="button login">Login</button>
-        <a class="button signup" href="/register">Signup</a>
-      </div>
+    {{else}}
+    {{> initialNavbar}}
+
+    <div class="container_fluid">
+        <div class="row">
+            <div class="col-sm-6" style="margin-top: 150px; text-align:center">
+                <h1>LevelUp Planner</h1>
+                <img src="/assets/images/levelup.png">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto minima voluptate itaque ipsam
+                    rem minus impedit, unde, magnam, nesciunt obcaecati tempora animi aut quae mollitia aspernatur harum
+                    rerum excepturi nam.</p>
+
+            </div>
+            <div class="col-sm-6" style="border-left: 1px solid lightgray; height:800px">
+
+                <h4 style="text-align: center; margin-top:50px">Get Start with login</h4>
+
+                <div class="form login-form">
+                    <input type="text" name="username" placeholder="username">
+                    <input type="text" name="password" placeholder="password">
+                    <div class="buttons">
+                        <button class="button login">Login</button>
+                        <a class="button signup" href="/register">Signup</a>
+                    </div>
+                </div>
+                <div class="form signup-form">
+                    <input type="text" name="username" placeholder="username">
+                    <input type="text" name="email" placeholder="email">
+                    <input type="text" name="password" placeholder="password">
+                    <div class="buttons">
+                        <a class="button login" href="/">Login</a>
+                        <button class="button signup">Signup</button>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
     </div>
-    <div class="form signup-form">
-      <input type="text" name="username" placeholder="username">
-      <input type="text" name="email" placeholder="email">
-      <input type="text" name="password" placeholder="password">
-      <div class="buttons">
-        <a class="button login" href="/">Login</a>
-        <button class="button signup">Signup</button>
-      </div>
-    </div>
-  {{/if}}
+    {{/if}}
 </form>
