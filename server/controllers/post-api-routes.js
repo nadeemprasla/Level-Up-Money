@@ -29,6 +29,13 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/api/addCategory",function(req,res){
+    console.log("###########")
+    db.Category.create(req.body).then(function(result){
+      res.json(result)
+    })
+  })
+
   // app.post("/api/budget",function(req,res){
 
   //   db.Allowance.create({total_budget:req.body.budget,UserId:req.body.UserId}

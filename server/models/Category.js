@@ -7,9 +7,15 @@ module.exports = (sequelize, DataTypes) => {
     })
 
  
-    Category.associate = function ({Entries, Budget}) {
+    Category.associate = function ({Entries, Budget,User,Allowance}) {
         Category.hasMany(Entries);
         Category.hasMany(Budget);
+        Category.belongsTo(User);
+        Category.belongsTo(Allowance,{
+            onDelete: "SET NULL",
+            onUpdate:'CASCADE',
+            targetKey:'month_name',
+            constraints: false});
 
     }   
 

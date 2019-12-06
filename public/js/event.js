@@ -4,6 +4,7 @@ $(function() {
     var userid =  $("#navbarDropdown").attr("data-userid");
     var currentBudget = $("#budget").val();
     var othrIncome = $("#othrIncome").val();
+
     $("#addItem").on("click", function(e){
 
         e.stopPropagation();
@@ -112,6 +113,33 @@ $(function() {
             document.documentElement.innerHTML=data;
         })
       }
+
+      $("#addCat").on("click",function(e){
+          e.preventDefault();
+          if(validator()){
+            $("#categoryModel").modal("toggle");
+          }
+          
+      })
+
+      $("#submit1").on("click",function(e){
+          
+          e.preventDefault();
+          var month = $("#monthChoice").val();
+          var category_name = $("#categoryName").val();
+          console.log(category_name);
+          
+          var data = {
+            category_name:category_name,
+            AllowanceId:month,
+            UserId:userid
+          } 
+
+          $.post("/api/addCategory",data).then(function(result){
+              console.log(result)
+          })
+          
+      })
 })
     
 

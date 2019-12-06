@@ -5,15 +5,12 @@
             <span>{{this.entry_name}}</span>
         </div>
         <div class="col-sm-5">
-            <textarea class="form-control" placeholder="Memo">
+            <p class="form-control" placeholder="Memo">
                 {{this.memo}}
-            </textarea>
+            </p>
         </div>
         <div class="col-sm-2">
-            <select class="form-control form-control-sm" id="choice1">
-                <option value="">Credit</option>
-                <option value="1">Debit</option>
-            </select>
+            <span>{{this.amountType}}</span>
         </div>
         <div class="col-sm-2">
             <div>${{this.amount}}</div>
