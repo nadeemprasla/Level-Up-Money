@@ -1,5 +1,6 @@
 var db = require("../models");
 var categories ;
+console.log(categories);
 var entries ;
 module.exports = function(app) {
 

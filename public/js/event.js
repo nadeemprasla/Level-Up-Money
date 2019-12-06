@@ -1,108 +1,118 @@
 $(function() {
 
     var categoryid;
-    var userid;
+    var userid =  $("#navbarDropdown").attr("data-userid");
+    var currentBudget = $("#budget").val();
+    var othrIncome = $("#othrIncome").val();
+    $("#addItem").on("click", function(e){
 
-
-    $(document).on("keyup", "#budget", function(event) {
-        console.log("inside update ")
-        var updatedBudget = $(this).val();
-        if (event.which === 13) {
-            updatedBudget.text = $(this).children("input").val().trim();
-          $(this).blur();
-          updatedBudget(updateBudget);
+        e.stopPropagation();
+        e.preventDefault();
+        
+        if(validator())
+        {
+            // if($("#plannedAmt").val() !== "")
+                $("#enteriesModal").modal("toggle");
         }
-      });
-
-
-    $(document).on("blur", "#budget", function(){
-        console.log("inside cancle ")
-        var currentBudget = $(this).val();
-    //     if (currentBudget) {
-    //     $(this).hide();
-        
-        
-    // }
-  });
-
-
-    $(document).on("click", "#budget", function() {
-        console.log("inside edit ")
-        var currentBudget = $(this).val();
-        $(this).val(currentBudget.text);
+        else
+            alert("Please fill mandatory field (*)!!")
     });
 
-   
-    $(".addItem").on("click",function(e){
-        
-        e.preventDefault();
-        if(validator()){
-            console.log("-------inside add item------")
-            categoryid = 1;
-            userid=1;
-            $("#enteriesModal").modal("toggle");
-        }
-        else{
-            alert("Please fill all mandatory fields")
-        }
-        
+    $(document).on("click", "#submit", function(e){
 
-    })
-
-
-    $("#submit").on("click",function(e){
-
+        e.stopPropagation();
         e.preventDefault();
         var name = $("#entryName").val();
         var category = 1;
         var amount = $("#amount").val();
         var memo = $("#memo").val();
-        
-
         var data ={
             entry_name:name,
-            category_id:category,
+            amountType:category,
             amount:amount,
             memo:memo,
             CategoryId:categoryid,
             UserId:userid
         }
 
-        $.post("/api/addItem",data).then(function(result){
+        $.post("/api/addItem",data).then(getAllEntries)
 
-            console.log("----------------")
-            console.log(result);
-            console.log("-----adding item-----");
-            
-            $.get("/api/allEntries",function(data){
-                
-                document.documentElement.innerHTML=data;
-                
-            })
+    });
 
-        })
+    $(document).on("keyup", "#budget", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log($("#monthChoice").val());
+        var data = {};
+        var total_budget = $(this).val();
+        var month_name = $("#monthChoice").val();
+        if (e.which === 13) {
+            data = {total_budget:total_budget
+                ,month_name:month_name,
+                UserId:userid}
+            currentBudget=total_budget;
+            updateBudget(data);
+        }
+      });
+
+      $(document).on("keyup", "#othrIncome", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log($("#budget").val());
+        var data = {};
+        var extra_income = $(this).val();
+        var month_name = $("#monthChoice").val();
+        if (e.which === 13) {
+            data = {extra_income:extra_income,
+                month_name:month_name,
+                UserId:userid}
+            othrIncome = othrIncome;   
+            updateBudget(data);
+        }
+      });  
 
 
+    $(document).on("blur", "#budget", function(e){
+        e.preventDefault();
+        event.stopPropagation();
+        $("#budget").val(currentBudget);
+       
+    });
 
-    })
+    $(document).on("blur", "#othrIncome", function(e){
+        e.preventDefault();
+        event.stopPropagation();
+        $("#othrIncome").val(othrIncome);
+       
+    });
 
-    function updateBudget(budget) {
+    function updateBudget(data) {
+    
         $.ajax({
           method: "PUT",
           url: "/api/budget",
-          data: budget
-        }).then(getBudget);
+          data: data
+        }).then(function(result){
+            console.log(result)
+        });
+        
       }
 
       function validator() {
         var isFilled = true;
-        $(".form-control").each(function() {
-          if ($(this).val() === "") {
+        if($("#budget").val()=== ""){
             isFilled = false;
-          }
-          
-        });
-
+        }
         return isFilled;
-      }  
+      }
+      
+      function getAllEntries(){
+        
+        $.get("/api/allEntries",function(data){
+            document.documentElement.innerHTML=data;
+        })
+      }
 })
+    
+
+    

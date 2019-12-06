@@ -29,6 +29,29 @@ module.exports = function(app) {
     });
   });
 
+  // app.post("/api/budget",function(req,res){
+
+  //   db.Allowance.create({total_budget:req.body.budget,UserId:req.body.UserId}
+       
+  //   ).then(function (result) {
+  //     res.json(result)
+  //   })
+
+  // })
+
+  app.put("/api/budget",function(req,res){
+
+    db.Allowance.upsert(req.body,{
+      where:{
+        $and:
+        [{UserId:req.body.UserId}, { month_name:req.body.month_name}]
+      }
+    }).then(function (result) {
+      res.json(result)
+    })
+
+  })
+
 //   app.delete("/api/posts/:id", function(req, res) {
 //     db.Post.destroy({
 //       where: {
