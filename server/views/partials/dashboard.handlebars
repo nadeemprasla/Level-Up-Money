@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-xl-2 bd-sidebar">
@@ -43,35 +44,34 @@
 
 
 
-
-            {{#each category}}
-            <div class="accordion" id="cardParent" >
-                <div class="card">
-                    <div class="card-header" id={{this.id}}>
-                        <h2 class="mb-0 input-group">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#"
-                                +{{catagory.name}} aria-expanded="true" aria-controls="cardOne">
-                                {{this.category_name}}
-                            </button>
-                            <button class="btn btn-link addItem" type="submit" data-catid="{{this.id}}"><i class="fa fa-plus"></i>Add
-                                Item</button>
-                            <div class="col-sm-2 ml-5">
-                                <input class="form-control" type="number" placeholder="amount">{{this.budget}}
-                            </div>
-                        </h2>
-                    </div>
-
-                    <div class="collapse show" id={{category.name}} aria-labelledby={{this.id}}
-                        data-parent="#cardParent">
-                        <div class="card-body">
-
-                            {{> entries result}}
+                {{#each category}}
+                <div class="accordion" id="cardParent">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="mb-0 input-group">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#"
+                                    +{{catagory.name}} aria-expanded="true" aria-controls="cardOne">
+                                    {{this.category_name}}
+                                </button>
+                                <button class="btn btn-link addItem" type="submit" data-catid="{{this.id}}"><i
+                                        class="fa fa-plus"></i>Add
+                                    Item</button>
+                                <div class="col-sm-2 ml-5">
+                                    <input class="form-control" type="number" placeholder="amount">{{this.budget}}
+                                </div>
+                            </h2>
                         </div>
 
+                        <div class="collapse show" id={{this.id}} aria-labelledby={{this.id}}
+                            data-parent="#cardParent">
+                            <div class="card-body">
+                                {{{formatName ../alldata this ../user}}}
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            {{/each}}
+                {{/each}}
 
 
 

@@ -1,6 +1,7 @@
 $(document).ready(function () {
+    
     userId = $("#navbarDropdown").attr("data-userid")
-
+    
     console.log(userId, "id")
 
     var categoryInput = $("#categoryName")

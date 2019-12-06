@@ -36,7 +36,42 @@ app.engine('handlebars', exphbs({
     defaultLayout: 'main',
     extname: '.handlebars',
     layoutsDir: 'server/views/layouts',
-    partialsDir: 'server/views/partials/'
+    partialsDir: 'server/views/partials/',
+    helpers: {
+        formatName: function (alldata, categories, user) {
+            console.log("Category current   :", categories)
+            html = "";
+            alldata.forEach((e) => {
+                if (categories.id === e.category_id) {
+                    console.log(categories.id, e)
+                    html +=
+                        `
+<div class="row">
+    <div class="col-sm-2">
+        <span>${e.entry_name}</span>
+    </div>
+    <div class="col-sm-5">
+        <textarea class="form-control" placeholder="Memo">${e.memo}</textarea>
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control form-control-sm" id="choice1">
+            <option value="">Credit</option>
+            <option value="1">Debit</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        <div>${e.amount}</div>
+    </div>
+</div>
+<hr>
+                    `
+                }
+
+            })
+            return html
+
+        }
+    }
 }));
 app.set('view engine', 'handlebars');
 
@@ -48,6 +83,7 @@ require("./controllers/post-api-routes.js")(app);
 require("./controllers/get-api-routes.js")(app);
 
 
+
 // Requiring our models for syncing
 const db = require('./models/index');
 var syncOptions = { force: true }
@@ -57,6 +93,9 @@ db.sequelize.sync().then(() => {
     // this is our way of making sure the server is not listening
     // to requests if we have not yet made a db connection
     app.listen(PORT, () => {
-        console.log(`App listening on PORT ${PORT}`);
+        console.log(`App listening on PORT ${PORT} `);
     });
 });
+
+
+
