@@ -55,7 +55,7 @@ app.engine('handlebars', exphbs({
     </div>
     <div class="col-sm-2">
         <select class="form-control form-control-sm" id="choice1" value=${e.amountType}>
-            <option value="">Credit</option>
+            <option value="0">Credit</option>
             <option value="1">Debit</option>
         </select>
     </div>

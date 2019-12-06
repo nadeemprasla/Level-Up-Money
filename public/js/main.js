@@ -32,7 +32,6 @@ $(document).ready(function () {
 
     // ADD ITEM
     // -----------------------------------------------------------------
-    var categoryid;
     $(".addItem").on("click", function (e) {
 
         e.preventDefault();
@@ -56,17 +55,18 @@ $(document).ready(function () {
         var name = $("#entryName").val();
         var amount = $("#amount").val();
         var memo = $("#memo").val();
+        var currentcat = $("#currentcategorychoice").val().trim()
+        var amountType = $("#addedAmountType").val().trim()
 
 
         var data = {
             entry_name: name,
-            amountType: 1,
+            amountType: amountType,
             amount: amount,
             memo: memo,
-            CategoryId: categoryid,
+            CategoryId: currentcat,
             UserId: userId
         }
-
         $.post("/api/addItem", data).then(function (result) {
 
             console.log("----------------")
