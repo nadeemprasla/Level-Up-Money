@@ -24,10 +24,27 @@ module.exports = function (app) {
         })
     })
 
-    app.post("/api/addItem", function(req, res) {
-        db.Entries.create(req.body).then(function(result) {
+    app.post("/api/addItem", function (req, res) {
+        db.Entries.create(req.body).then(function (result) {
             res.json(result)
         });
-      });
+    });
 
-}
+
+
+
+    app.put("/api/budget", function (req, res) {
+console.log(req.body)
+        db.Allowance.upsert(req.body, {
+            where: {
+                $and:
+                    [{ UserId: req.body.UserId }, { month_name: req.body.month_name }]
+            }
+        }).then(function (result) {
+            console.log(result)
+            res.json(result)
+        })
+
+    })
+
+};

@@ -5,12 +5,14 @@ const db = require('../models')
 let allData;
 let category;
 let user;
+let allowance;
+var currentMonth = new Date().getMonth() + 1;
 
 router.get('/', (req, res) => {
     user = req.user
     if (req.user) {
         console.log("userid: ", user.id)
-        searchAllData(user, res)
+        searchUser(user, res)
     }
 
     else {
@@ -29,16 +31,36 @@ router.get("/addedItem", (req, res) => {
 
 router.get('/register', (req, res) => res.render('home', { user: req.user }));
 
-
-
-function searchAllData(user, res) {
-    db.Category.findAll({
+function searchUser(user, res) {
+    var currentMonth = new Date().getMonth() + 1;
+    db.Allowance.findOne({
         where: {
             UserId: user.id
         },
         raw: true,
+    }).then((data) => {
+        console.log("allowance", data)
+        allowance = data
+        searchAllData(user, res)
+
+    })
+}
+
+function searchAllData(user, res) {
+    var currentMonth = new Date().getMonth() + 1;
+    console.log("current",currentMonth);
+    console.log(user.id)
+    db.Category.findAll({
+        where: {
+            $and: {
+                AllowanceId: currentMonth,
+                UserId: user.id
+            }
+        },
+        raw: true,
         include: [db.Entries]
     }).then((data) => {
+        console.log("enteries", data)
         allData = [];
         data.map((e) => {
             catUpperCase = e.category_name.toLowerCase()
@@ -90,7 +112,9 @@ function searchEnteries(user, res) {
         res.render('home', {
             user: user,
             alldata: allData,
-            category: category
+            category: category,
+            allowance: allowance,
+            currentMonth: currentMonth
         })
 
     }

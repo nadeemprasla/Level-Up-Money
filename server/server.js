@@ -44,6 +44,9 @@ app.engine('handlebars', exphbs({
             alldata.forEach((e) => {
                 if (categories.id === e.category_id) {
                     console.log(categories.id, e)
+                    var amountType;
+                    if(e.amountType === 1) {amountType="Debit"}
+                    else{ amountType="Credit"}
                     html +=
                         `
 <div class="row">
@@ -51,13 +54,10 @@ app.engine('handlebars', exphbs({
         <span>${e.entry_name}</span>
     </div>
     <div class="col-sm-5">
-        <textarea class="form-control" placeholder="Memo">${e.memo}</textarea>
+        <p class="form-control">${e.memo}</p>
     </div>
     <div class="col-sm-2">
-        <select class="form-control form-control-sm" id="choice1" value=${e.amountType}>
-            <option value="0">Credit</option>
-            <option value="1">Debit</option>
-        </select>
+        <p>${amountType}</p>
     </div>
     <div class="col-sm-2">
         <div>${e.amount}</div>

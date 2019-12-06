@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         amount: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(8,4),
             allowNull: false
         },
         memo: {
@@ -19,11 +19,17 @@ module.exports = (sequelize, DataTypes) => {
 
     })
 
-    Entries.associate = function ({Category, User}) {
+    Entries.associate = function ({ Category, User, Allowance }) {
         Entries.belongsTo(Category);
         Entries.belongsTo(User);
+        Category.belongsTo(Allowance, {
+            onDelete: "SET NULL",
+            onUpdate: 'CASCADE',
+            targetKey: 'month_name',
+            constraints: false
+        });
     }
 
     return Entries;
-    
+
 }
