@@ -1,5 +1,6 @@
 var db = require("../models");
 var allowance ;
+var userInfo;
 module.exports = function(app) {
 
   app.get("/api", function(req, res) {
@@ -10,6 +11,7 @@ module.exports = function(app) {
   });
   
   app.get("/api/:id/:month",function(req,res){
+    userInfo = req.user;
     var month = req.params.month
     var userId = req.params.id
     db.Allowance.findOne({
@@ -96,7 +98,7 @@ module.exports = function(app) {
       })
 
       res.render('home', {
-          user: user,
+          user: userInfo,
           alldata: allData,
           category: category,
           allowance: allowance,
@@ -106,5 +108,9 @@ module.exports = function(app) {
   })
 
   }
+
+  app.get("/home",function(req,res){
+    res.render('home',{user:""});
+  })
 
 }

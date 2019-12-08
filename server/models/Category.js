@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         category_amount: {
-            type: DataTypes.DECIMAL(8,4),
+            type: DataTypes.DECIMAL(10,2),
             allowNull:true
           
         }

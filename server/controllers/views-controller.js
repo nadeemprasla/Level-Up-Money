@@ -35,11 +35,7 @@ function searchUser(user, res) {
     var currentMonth = new Date().getMonth() + 1;
     db.Allowance.findOne({
         where: {
-            $and:{
-                month_name:currentMonth,
-                UserId:user.id
-              }
-           
+            UserId: user.id
         },
         raw: true,
     }).then((data) => {
@@ -99,12 +95,10 @@ function searchAllData(user, res) {
 function searchEnteries(user, res) {
     db.Category.findAll({
         where: {
-
-            $and:{
-                AllowanceId:currentMonth,
+            $and: {
+                AllowanceId: currentMonth,
                 UserId: user.id
             }
-            
         },
         raw: true
     }).then((data) => {
@@ -115,7 +109,7 @@ function searchEnteries(user, res) {
             category.push({
                 "id": e.id,
                 "category_name": upperit,
-                "category_amount":e.category_amount,
+                "category_amount":e.category_amount
             })
         })
         console.log("From Server Category:  ", category)

@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
             
         },
         total_budget:{
-            type: DataTypes.DECIMAL(8,4),
+            type: DataTypes.DECIMAL(10,2),
             allowNull:false
           },
           extra_income:{
-            type: DataTypes.DECIMAL(8,4),
+            type: DataTypes.DECIMAL(10,2),
             allowNull:true
           }   
     }

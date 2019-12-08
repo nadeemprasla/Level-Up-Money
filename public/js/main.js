@@ -7,9 +7,7 @@ $(document).ready(function () {
 
     console.log(userId, "id")
 
-    var categoryInput = $("#categoryName")
-
-    $(".categorySbtn").on("click", handleSubmit);
+    $(document).on("click",".categorySbtn", handleSubmit);
 
     $(document).on("click","#addCat", function (e) {
         e.preventDefault();
@@ -30,13 +28,14 @@ $(document).ready(function () {
     function handleSubmit(event) {
         event.preventDefault()
         // userId = categoryInput.attr("data-userid")
-        newCategory = categoryInput.val();
+        newCategory = $("#categoryName").val();
         var month_name = $("#monthChoice").val();
-
+        
         submitPost(userId, newCategory,month_name)
     }
 
     function submitPost(userId, newCategory,month_name) {
+        
         $.post("/api/category/posts", {
             category_name: newCategory,
             UserId: userId,
@@ -47,8 +46,6 @@ $(document).ready(function () {
 
         })
     }
-
-
 
 
     // ADD ITEM
@@ -157,8 +154,6 @@ $(document).ready(function () {
         }
     });
 
-    
-
 
     $(document).on("blur", "#budget", function (e) {
         e.preventDefault();
@@ -181,7 +176,7 @@ $(document).ready(function () {
             url: "/api/budget",
             data: data
         }).then(function (result) {
-            console.log(result)
+            
         
         });
 
@@ -189,8 +184,7 @@ $(document).ready(function () {
 
     // Month change
     //----------------------------------------------------
-    $('#monthChoice').change(function() {
-
+    $(document).on("change",'#monthChoice',function() {
         var month = $("#monthChoice option:selected").val();
         var id = userId;
         $.get("/api/"+id+"/"+month,function(result){
@@ -199,7 +193,6 @@ $(document).ready(function () {
             $("#monthChoice").val(month);
             
         })
-
 
     });
 
@@ -236,8 +229,7 @@ $(document).ready(function () {
             url: "/api/categoryAmt",
             data: data
         }).then(function (result) {
-            console.log(result)
-        
+            
         });
 
     }
