@@ -32,9 +32,10 @@ router.get("/addedItem", (req, res) => {
 router.get('/register', (req, res) => res.render('home', { user: req.user }));
 
 function searchUser(user, res) {
-    var currentMonth = new Date().getMonth() + 1;
+    //var currentMonth = new Date().getMonth() + 1;
     db.Allowance.findOne({
         where: {
+            month_name:currentMonth,
             UserId: user.id
         },
         raw: true,
