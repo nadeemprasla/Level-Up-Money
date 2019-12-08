@@ -1,7 +1,5 @@
 var db = require("../models");
-var categories ;
-console.log(categories);
-var entries ;
+var allowance ;
 module.exports = function(app) {
 
   app.get("/api", function(req, res) {
@@ -10,124 +8,103 @@ module.exports = function(app) {
       res.json(data);
     });
   });
-
-  app.get("/api/allUserInfo/:id", function(req, res) {
-
-    var currentMonth = new Date().getMonth()+1;
-    db.Category.findAll({
-      where:{
-        $and:{
-          AllowanceId:currentMonth,
-          UserId:req.params.id 
-
-        }
-        
-      }
-    }).then(function(data) {
-
-      var alldata = [];
-      var categories =[];
-      for(var i=0;i<data.length;i++){
-        
-        var entries = getEntries(req.params.id,data[i].id);
-        
-        var entry = [];
-        if(entries){
-          for(var j=0;j<entries.length;j++){
-            entry.push({entry_name:entries[i].entry_name,
-              amount:entries[i].amount,
-              memo:entries[i].memo,
-              amountType:entries[i].amountType})
-          }
-        }
-          categories.push({ category_name:data[i].category_name,entries:entry});
   
-      }
-      var allowance;
-      getAllowance(req.params.id,currentMonth,function(data){
-        allowance = data;
-       
-        if(allowance){
-          alldata = {
-            total_budget:allowance.total_budget,
-            extraIncome:allowance.extra_income,
-            monthName:currentMonth,
-            categories:categories
-        }
-        res.render("home",{user:req.user,allData:alldata})
-      }
-      
-      });
-      
-    });
-
-
-  });
-
-
-  app.get("/api/allEntries", function(req, res) {
-
-    db.Entries.findAll({
+  app.get("/api/:id/:month",function(req,res){
+    var month = req.params.month
+    var userId = req.params.id
+    db.Allowance.findOne({
         where: {
-            UserId: req.user.id
-        }
-    }).then(function(data) {
-      
-      var result=
-        {entries:data,  
-          categories:categories}
-      res.render("home",{user:req.user,allData:{result:result}})
-      
-    });
-  });
-
-  app.get("/api/allEntries/:category_id/:userid", function(req, res) {
-
-    db.Entries.findAll({
-      where:{
-        $and:[{CategoryId:req.params.category_id},{UserId:req.params.userid}]
+            $and:{
+                month_name:month,
+                UserId:userId
+              }
+           
+        },
+        raw: true,
+    }).then((data) => {
         
-      }
-    }).then(function(data) {
+          allowance = data
+          getCategories(userId,month,res)
 
-      console.log(data[0])
-      
-      
-    });
-  });
-
-  function getEntries(user_id,category_id){
-
-    db.Entries.findAll({
-      where:{
-        $and:[{CategoryId:category_id},{UserId:user_id}]
-        
-      }
-    }).then(function(data) {
-
-      return data
-      
-    });
-
-  }
-
-  function getAllowance(id,currentMonth,cb){
-    db.Allowance.findAll({
-      where:
-      {
-        $and:{
-          month_name:currentMonth,
-          UserId:id
-        }
-        
-    }}).then(function(data){
-      console.log("***********")
-      console.log(data);
-      console.log("***********")
-      cb(data);
     })
+  })
+
+  function getCategories(userId,month,res){
+  
+    db.Category.findAll({
+        where: {
+            $and: {
+                AllowanceId: month,
+                UserId: userId
+            }
+        },
+        raw: true,
+        include: [db.Entries]
+    }).then((data) => {
+        
+        allData = [];
+        data.map((e) => {
+            catUpperCase = e.category_name.toLowerCase()
+            catUpperCase = catUpperCase.charAt(0).toUpperCase() + catUpperCase.slice(1)
+            if (e["Entries.entry_name"]) {
+
+                entryUpperCase = e["Entries.entry_name"];
+                entryUpperCase = entryUpperCase.toLowerCase();
+                entryUpperCase = entryUpperCase.charAt(0).toUpperCase() + entryUpperCase.slice(1)
+                allData.push({
+                    "category_id": e.id,
+                    "category_name": catUpperCase,
+                    "category_amount":e.category_amount,
+                    "entry_id": e["Entries.id"],
+                    "entry_name": entryUpperCase,
+                    "amount": e["Entries.amount"],
+                    "memo": e["Entries.memo"],
+                    "amountType": e["Entries.amountType"]
+                })
+            }
+           
+        })
+        
+        getEnteries(userId,month,res)
+
+    }
+    )
   }
 
-  
+  function getEnteries(user,month,res){
+
+    db.Category.findAll({
+      where: {
+
+          $and:{
+              AllowanceId:month,
+              UserId:user
+          }
+          
+      },
+      raw: true
+    }).then((data) => {
+      category = [];
+      data.map((e) => {
+          upperit = e.category_name.toLowerCase()
+          upperit = upperit.charAt(0).toUpperCase() + upperit.slice(1)
+          category.push({
+              "id": e.id,
+              "category_name": upperit,
+              "category_amount":e.category_amount,
+          })
+      })
+
+      res.render('home', {
+          user: user,
+          alldata: allData,
+          category: category,
+          allowance: allowance,
+          currentMonth: month
+      })
+
+  })
+
+  }
 
 }

@@ -29,9 +29,12 @@ module.exports = (sequelize, DataTypes) => {
         ]
     
     });
-    Allowance.associate = function({ User ,Category}) {
+    Allowance.associate = function({ User ,Category,Entries}) {
         Allowance.belongsTo(User);
         Allowance.hasMany(Category,{
+            sourceKey: 'month_name', constraints: false
+        });
+        Allowance.hasMany(Entries,{
             sourceKey: 'month_name', constraints: false
         });
     }

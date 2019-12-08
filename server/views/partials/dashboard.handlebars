@@ -3,10 +3,10 @@
         <div class="col-sm-3 col-xl-2 bd-sidebar">
             <div class="d-flex align-items-center mt-5">
                 <ul style="list-style-type: none;">
-                    <li style="margin:20px"><a href="#" id="addCat">Add Catagory</a></li>
-                    <li style="margin:20px"><a href="#">Financial Tips</a></li>
-                    <li style="margin:20px"><a href="#">Blogs</a></li>
-                    <li style="margin:20px"><a href="#">Expence chart</a></li>
+                    <li style="margin:20px"><a class= "text-info" href="#" id="addCat">Add Catagory</a></li>
+                    <li style="margin:20px"><a class= "text-info" href="https://www.thebalance.com/top-ten-financial-tips-1289309">Financial Tips</a></li>
+                    <li style="margin:20px"><a class= "text-info" href="https://nataliebacon.com/best-budgeting-blog-posts/">Blogs</a></li>
+                    <li style="margin:20px"><a class= "text-info" href="#">Expence chart</a></li>
                 </ul>
             </div>
 
@@ -29,11 +29,11 @@
                             <option value="11">November</option>
                             <option value="12">December</option>
                         </select>
-                        <h5 class="ml-3 mt-2">Budget/Salary($) * </h5>
+                        <h6 class="ml-3 mt-2">Budget/Salary($) * </h6>
                         <input class="form-control ml-sm-2" type="number" placeholder="Budget" id="budget"
                             data-bind="value:budget"
                             value="{{allowance.total_budget}}">
-                        <h5 class="ml-3 mt-2">Other income($)</h5>
+                        <h6 class="ml-3 mt-2">Other income($)</h6>
                         <input class="form-control ml-sm-2" type="number" placeholder="Other income" id="othrIncome"
                             data-bind="value:othrIncome" value="{{allowance.extra_income}}">
                     </div>
@@ -41,24 +41,26 @@
                 </form>
             </div>
 
-
+        
             {{#each category}}
             <div class="accordion" id="cardParent">
 
                 <div class="card">
                     <div class="card-header" id={{this.id}}>
-                        <h2 class="mb-0 input-group">
-                            <button class="btn btn-link col-sm-3" type="button" data-toggle="collapse" data-target="#"
-                                +{{catagory.name}} aria-expanded="true" aria-controls="cardOne">{{this.category_name}}
-                            </button>
-                            <div class="input-group">
-                                <h6 class="mt-2">Planned Amount($) *</h6>
-                                <input class="form-control ml-2 col-sm-3" type="number" placeholder="amount"
-                                    id="plannedAmt">
-                                <button class="btn btn-link ml-md-auto" type="submit" id="addItem" data-catid="{{this.id}}"><i
+                        <div class="input-group">
+                            <h2 class="mr-2">
+                                <button class="btn btn-link text-info" type="button" data-toggle="collapse" data-target="#"
+                                    +{{catagory.name}} aria-expanded="true" aria-controls="cardOne">{{this.category_name}}
+                                </button>
+                                
+                                <h6 class="m-3 ml-md-auto">Amount($)</h6>
+                                <input class="form-control m-2 col-sm-3" type="number" placeholder="amount"
+                                    id="plannedAmt" value="{{this.category_amount}}">
+                                <button class="btn btn-link ml-md-auto  text-info" type="submit" id="addItem" data-catid="{{this.id}}"><i
                                         class="fa fa-plus"></i>Add Item</button>
-                            </div>
-                        </h2>
+                                
+                            </h2>
+                        </div>
                     </div>
 
                     <div class="collapse show" id={{category.name}} aria-labelledby={{this.id}}
@@ -69,8 +71,8 @@
                                 <div class="col-sm-5">Memo</div>
                                 <div class="col-sm-2">AmtType</div>
                                 <div class="col-sm-2">Amountspent</div>
-                                <hr>
-                            </div>
+                                
+                            </div><hr>
                             {{{formatName ../alldata this ../user}}}
 
                         </div>
@@ -116,10 +118,7 @@
                     <div class="modal-body">
                         {{> entries category}}
                     </div>
-                    {{!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div> --}}
+                    
                 </div>
             </div>
         </div>
