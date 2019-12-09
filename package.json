@@ -2,6 +2,9 @@
   "name": "levelupmoney",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+      "node":"10.16.3"
+  },
   "main": "",
   "scripts": {
     "start": "node server/server.js",

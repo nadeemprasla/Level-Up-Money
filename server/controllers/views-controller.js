@@ -32,9 +32,10 @@ router.get("/addedItem", (req, res) => {
 router.get('/register', (req, res) => res.render('home', { user: req.user }));
 
 function searchUser(user, res) {
-    var currentMonth = new Date().getMonth() + 1;
+    //var currentMonth = new Date().getMonth() + 1;
     db.Allowance.findOne({
         where: {
+            month_name:currentMonth,
             UserId: user.id
         },
         raw: true,
@@ -73,6 +74,7 @@ function searchAllData(user, res) {
                 allData.push({
                     "category_id": e.id,
                     "category_name": catUpperCase,
+                    "category_amount":e.category_amount,
                     "entry_id": e["Entries.id"],
                     "entry_name": entryUpperCase,
                     "amount": e["Entries.amount"],
@@ -94,7 +96,10 @@ function searchAllData(user, res) {
 function searchEnteries(user, res) {
     db.Category.findAll({
         where: {
-            UserId: user.id
+            $and: {
+                AllowanceId: currentMonth,
+                UserId: user.id
+            }
         },
         raw: true
     }).then((data) => {
@@ -105,6 +110,7 @@ function searchEnteries(user, res) {
             category.push({
                 "id": e.id,
                 "category_name": upperit,
+                "category_amount":e.category_amount
             })
         })
         console.log("From Server Category:  ", category)

@@ -4,6 +4,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        category_amount: {
+            type: DataTypes.DECIMAL(10,2),
+            allowNull:true
+          
+        }
     })
 
 

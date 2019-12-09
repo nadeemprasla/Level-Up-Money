@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
             
         },
         total_budget:{
-            type: DataTypes.DECIMAL(8,4),
+            type: DataTypes.DECIMAL(10,2),
             allowNull:false
           },
           extra_income:{
-            type: DataTypes.DECIMAL(8,4),
+            type: DataTypes.DECIMAL(10,2),
             allowNull:true
           }   
     }
@@ -29,9 +29,12 @@ module.exports = (sequelize, DataTypes) => {
         ]
     
     });
-    Allowance.associate = function({ User ,Category}) {
+    Allowance.associate = function({ User ,Category,Entries}) {
         Allowance.belongsTo(User);
         Allowance.hasMany(Category,{
+            sourceKey: 'month_name', constraints: false
+        });
+        Allowance.hasMany(Entries,{
             sourceKey: 'month_name', constraints: false
         });
     }

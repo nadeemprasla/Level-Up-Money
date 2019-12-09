@@ -34,7 +34,7 @@ module.exports = function (app) {
 
 
     app.put("/api/budget", function (req, res) {
-console.log(req.body)
+    
         db.Allowance.upsert(req.body, {
             where: {
                 $and:
@@ -44,6 +44,24 @@ console.log(req.body)
             console.log(result)
             res.json(result)
         })
+
+    })
+
+    app.put("/api/categoryAmt",function(req,res){
+
+      db.Category.update({category_amount:req.body.category_amount},{
+
+        where:{
+          id:req.body.id
+            
+          
+        }
+      }).then(function (result) {
+          console.log(result)
+          res.json(result)
+      
+
+      });
 
     })
 

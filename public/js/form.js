@@ -14,6 +14,11 @@ $(function () {
         $('.logout').on('click', logout);
     }
 
+    if (window.location.pathname === '/home') {
+        $('.signup-form').remove()
+        $('.login').on('click', login);
+    }
+
 
 
 })
