@@ -74,3 +74,38 @@ input + input, .form .buttons {
     left: 50%;
     transform: translate(-50%, 0%);
 }
+.chart-content {
+    width: 95vw;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.chartbody{
+    margin: 0;
+    padding: 0;
+}
+.chart-container {
+    position: relative;
+    margin: 0;
+  }
+
+
+.colchart{
+    margin: 10px;
+    padding: 0;
+}
+  .chartrow {
+    width: auto;
+    margin: 30px;
+    height: 40%;
+    width: 40%;
+    display: inline-block;
+    align-content: center;
+  }
+
+  
+#chartcontainer {
+    width: 90vw;
+    padding: 0;
+}

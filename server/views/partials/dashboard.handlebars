@@ -6,7 +6,7 @@
                     <li style="margin:20px"><a class= "text-info" href="#" id="addCat">Add Catagory</a></li>
                     <li style="margin:20px"><a class= "text-info" href="https://www.thebalance.com/top-ten-financial-tips-1289309">Financial Tips</a></li>
                     <li style="margin:20px"><a class= "text-info" href="https://nataliebacon.com/best-budgeting-blog-posts/">Blogs</a></li>
-                    <li style="margin:20px"><a class= "text-info" href="#">Expence chart</a></li>
+                    <li style="margin:20px"><a id="expenseChart" class= "text-info" href="#">Expense chart</a></li>
                 </ul>
             </div>
 
@@ -117,6 +117,33 @@
                     </div>
                     <div class="modal-body">
                         {{> entries category}}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        {{!-- Modal --}}
+        <div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-labelledby="chartModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content chart-content">
+                    <div class="modal-header">
+                        <div>
+                        <button id="btnChartType" value="pie">Pie Chart</button>
+                        <button id="btnChartType" value="doughnut">Doughnut Chart</button>
+                        <button id="btnChartType" value="radar">Radar Chart</button>
+                        <button id="btnChartType" value="polarArea">Polar Area</button>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body chartbody">
+                        {{> chart}}
                     </div>
                     
                 </div>
