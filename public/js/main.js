@@ -100,9 +100,7 @@ $(document).ready(function () {
 
     // Budget
     // -----------------------------------------------------------
-    var currentBudget = $("#budget").val();
-    var othrIncome = $("#othrIncome").val();
-    var categoryAmt = $("#plannedAmt").val();
+    
     
 
     $(document).on("blur", "#budget", function (e) {
@@ -120,26 +118,21 @@ $(document).ready(function () {
             month_name: month_name,
             UserId: userId
         }
-        newBudget =total_budget;
+        
         
         updateBudget(data);
         ;
     });
 
-    $(document).on("click", "#budget", function (e) {
-
-        var total_budget = $(this).val();
-        $("#budget").val(total_budget);
-
-    });
+    
 
     $(document).on("blur", "#othrIncome", function (e) {
         e.stopPropagation();
         e.preventDefault();
 
+        var total_budget = $("#budget").val();
         var data = {};
         var extra_income = $(this).val();
-        var total_budget = currentBudget
         var month_name = $("#monthChoice").val();
         
         data = {
@@ -149,7 +142,7 @@ $(document).ready(function () {
             total_budget: total_budget
         }
 
-        othrIncome = extra_income;
+        
         updateBudget(data);
         
     });
