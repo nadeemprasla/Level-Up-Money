@@ -15,7 +15,7 @@ $(document).ready(function () {
             $("#categoryModel").modal("toggle");
         }
 
-    })
+     })
 
     function validator() {
         var isFilled = true;
@@ -103,27 +103,27 @@ $(document).ready(function () {
     var currentBudget = $("#budget").val();
     var othrIncome = $("#othrIncome").val();
     var categoryAmt = $("#plannedAmt").val();
-    var newBudget;
+    
 
-    $(document).on("keyup", "#budget", function (e) {
-
+    $(document).on("blur", "#budget", function (e) {
+        
         e.stopPropagation();
         e.preventDefault();
 
         var data = {};
         var total_budget = $(this).val();
         var month_name = $("#monthChoice").val();
-
-        if (e.which === 13) {
-            data = {
-                total_budget: total_budget,
-                month_name: month_name,
-                UserId: userId
-            }
-            newBudget = total_budget;
-
-            updateBudget(data);
-        };
+        console.log(e.which)
+        
+        data = {
+            total_budget: total_budget,
+            month_name: month_name,
+            UserId: userId
+        }
+        newBudget =total_budget;
+        
+        updateBudget(data);
+        ;
     });
 
     $(document).on("click", "#budget", function (e) {
@@ -133,7 +133,7 @@ $(document).ready(function () {
 
     });
 
-    $(document).on("keyup", "#othrIncome", function (e) {
+    $(document).on("blur", "#othrIncome", function (e) {
         e.stopPropagation();
         e.preventDefault();
 
@@ -141,33 +141,19 @@ $(document).ready(function () {
         var extra_income = $(this).val();
         var total_budget = currentBudget
         var month_name = $("#monthChoice").val();
-        if (e.which === 13) {
-            data = {
-                extra_income: extra_income,
-                month_name: month_name,
-                UserId: userId,
-                total_budget: total_budget
-            }
-
-            othrIncome = extra_income;
-            updateBudget(data);
+        
+        data = {
+            extra_income: extra_income,
+            month_name: month_name,
+            UserId: userId,
+            total_budget: total_budget
         }
+
+        othrIncome = extra_income;
+        updateBudget(data);
+        
     });
 
-
-    $(document).on("blur", "#budget", function (e) {
-        e.preventDefault();
-        event.stopPropagation();
-        $("#budget").val(newBudget);
-
-    });
-
-    $(document).on("blur", "#othrIncome", function (e) {
-        e.preventDefault();
-        event.stopPropagation();
-        $("#othrIncome").val(othrIncome);
-
-    });
 
     function updateBudget(data) {
 
@@ -199,28 +185,35 @@ $(document).ready(function () {
     // Category amount
     //----------------------------------------
 
-    $(document).on("keyup", "#plannedAmt", function (e) {
+    
 
-        e.stopPropagation();
+    $(document).on("blur", "#plannedAmt", function (e) {
         e.preventDefault();
-
-        var categoryId = $(this).parent().parent().attr('id');
-
+        event.stopPropagation();
         var data = {};
+        var categoryId=$(this).parent().parent().attr('id');
         var category_amount = $(this).val();
-
         var month_name = $("#monthChoice").val();
-        if (e.which === 13) {
-            data = {
-                category_amount: category_amount,
-                month_name: month_name,
-                UserId: userId,
-                id: categoryId
-            }
-            categoryAmt = category_amount;
-            updateCategory(data);
+        
+        data = {
+            category_amount: category_amount,
+            month_name: month_name,
+            UserId: userId,
+            id:categoryId
         }
+        categoryAmt = category_amount;
+        updateCategory(data);
+        
+
     });
+
+    $(document).on("click",".card-header",function(e){
+        var currentBudget = $(this).val();
+       // $(this).children().hide();
+        $(this).children("input#plannedAmt").val(currentBudget);
+        $(this).children("input#plannedAmt").show();
+        $(this).children("input#plannedAmt").focus();
+    })
 
     function updateCategory(data) {
 
