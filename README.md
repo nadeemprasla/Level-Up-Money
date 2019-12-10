@@ -1,3 +1,4 @@
+
 ## Level Up Money
 
 ### Overview
@@ -5,6 +6,9 @@
 * The bugdet planner application gives you functionality where you can plan your monthly budget by login/signup the application.
 ​
 * You can perform following operations
+​
+​
+​
 ​
 1. Add budget and other income for any month
 2. Add category/ies for month/s
